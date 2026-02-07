@@ -24,12 +24,6 @@
   --orange: #fdcb6e;
   --pink: #fd79a8;
   --blue: #74b9ff;
-  --cat-factual: #e17055;
-  --cat-visual: #6c5ce7;
-  --cat-clinical: #00cec9;
-  --cat-analogy: #fdcb6e;
-  --cat-publisher: #fd79a8;
-  --cat-other: #74b9ff;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,12 +40,11 @@ body {
 .header {
   background: linear-gradient(135deg, #1a1d27 0%, #242836 100%);
   border-bottom: 1px solid var(--border);
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
 }
-
 .header-inner {
   max-width: 1400px;
   margin: 0 auto;
@@ -61,97 +54,64 @@ body {
   gap: 1rem;
   flex-wrap: wrap;
 }
-
 .header h1 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: -0.5px;
 }
+.header .subtitle { color: var(--text-dim); font-size: 0.8rem; margin-top: 0.15rem; }
 
-.header .subtitle {
-  color: var(--text-dim);
-  font-size: 0.85rem;
-  margin-top: 0.2rem;
-}
-
-.nav-tabs {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
+.nav-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .nav-tab {
   background: var(--surface2);
   border: 1px solid var(--border);
   color: var(--text-dim);
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.9rem;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   transition: all 0.2s;
+  font-family: inherit;
 }
-
 .nav-tab:hover { border-color: var(--accent); color: var(--text); }
 .nav-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-.stats-bar {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
+.stats-bar { display: flex; gap: 1.5rem; align-items: center; }
 .stat { text-align: center; }
-.stat-num {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--accent2);
-}
-.stat-label {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.stat-num { font-size: 1.3rem; font-weight: 800; color: var(--accent2); }
+.stat-label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+.db-status { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: var(--text-dim); }
+.db-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+.db-dot.connected { background: var(--green); }
 
-/* ─── Main Content ─── */
-.main {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
-}
+/* ─── Main ─── */
+.main { max-width: 1400px; margin: 0 auto; padding: 1.5rem 2rem; }
+.view { display: none; }
+.view.active { display: block; }
 
-/* ─── Dashboard View ─── */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
+/* ─── Cards ─── */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.5rem;
 }
+.card-title { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
 
-.card-title {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text);
+/* ─── Dashboard ─── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
 }
-
 .chapter-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
 }
-
 .chapter-card {
   background: var(--surface2);
   border: 1px solid var(--border);
@@ -161,71 +121,25 @@ body {
   transition: all 0.2s;
   text-align: center;
 }
-
 .chapter-card:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(108,92,231,0.2);
 }
-
-.chapter-card .ch-num {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--accent);
-}
-
-.chapter-card .ch-name {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  margin-top: 0.25rem;
-  line-height: 1.3;
-}
-
-.chapter-card .ch-stats {
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
-  color: var(--accent2);
-  font-weight: 600;
-}
+.chapter-card .ch-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+.chapter-card .ch-name { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
+.chapter-card .ch-stats { margin-top: 0.4rem; font-size: 0.7rem; color: var(--accent2); font-weight: 600; }
 
 /* ─── Heatmap ─── */
-.heatmap-container {
-  grid-column: 1 / -1;
-}
-
-.heatmap-chapter-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin: 1rem 0 0.5rem;
-  color: var(--text-dim);
-}
-
-.heatmap-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-}
-
+.heatmap-chapter-title { font-size: 0.85rem; font-weight: 600; margin: 0.8rem 0 0.4rem; color: var(--text-dim); }
+.heatmap-row { display: flex; flex-wrap: wrap; gap: 3px; }
 .heatmap-cell {
-  width: 28px;
-  height: 28px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.55rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
+  width: 26px; height: 26px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.5rem; font-weight: 600; cursor: pointer;
+  transition: all 0.15s; position: relative;
 }
-
-.heatmap-cell:hover {
-  transform: scale(1.4);
-  z-index: 10;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-
+.heatmap-cell:hover { transform: scale(1.5); z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 .heatmap-cell.heat-0 { background: var(--surface2); color: var(--text-dim); }
 .heatmap-cell.heat-1 { background: #2d3a2d; color: #69db7c; }
 .heatmap-cell.heat-2 { background: #2d4a2d; color: #69db7c; }
@@ -233,624 +147,338 @@ body {
 .heatmap-cell.heat-4 { background: #5a5a2d; color: #ffd43b; }
 .heatmap-cell.heat-5 { background: #6a3a2d; color: #ff922b; }
 .heatmap-cell.heat-6 { background: #7a2a2d; color: #ff6b6b; }
+.legend { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 0.75rem 0; }
+.legend-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; color: var(--text-dim); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
 
-/* ─── Category Legend ─── */
-.legend {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin: 1rem 0;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  cursor: pointer;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-
-.legend-item:hover, .legend-item.active { background: var(--surface2); color: var(--text); }
-
-.legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-}
-
-/* ─── A/B Comparison View ─── */
-.comparison-view { display: none; }
-
-.comparison-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.comparison-nav {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
+/* ─── Buttons ─── */
 .btn {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  font-family: inherit;
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+  padding: 0.45rem 0.9rem; border-radius: 8px; cursor: pointer;
+  font-size: 0.8rem; font-weight: 500; transition: all 0.2s; font-family: inherit;
 }
-
 .btn:hover { border-color: var(--accent); }
-.btn-accent { background: var(--accent); border-color: var(--accent); }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn-accent:hover { background: #5b4bd6; }
-.btn-green { background: var(--green); border-color: var(--green); color: #fff; }
-.btn-red { background: var(--red); border-color: var(--red); color: #fff; }
 
-.btn-lg {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+/* ─── Filter chips ─── */
+.filter-bar { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.filter-chip {
+  padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border); background: var(--surface);
+  color: var(--text-dim); transition: all 0.2s; font-family: inherit;
 }
+.filter-chip:hover { border-color: var(--accent); color: var(--text); }
+.filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-.comparison-panels {
+/* ─── Category tags ─── */
+.category-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.cat-tag { padding: 0.15rem 0.5rem; border-radius: 20px; font-size: 0.65rem; font-weight: 600; }
+.cat-tag.factual-fix { background: rgba(225,112,85,0.2); color: #e17055; }
+.cat-tag.visual-overhaul { background: rgba(108,92,231,0.2); color: #6c5ce7; }
+.cat-tag.clinical-hook { background: rgba(0,206,201,0.2); color: #00cec9; }
+.cat-tag.aha--analogy { background: rgba(253,203,110,0.2); color: #fdcb6e; }
+.cat-tag.publisher-comparison { background: rgba(253,121,168,0.2); color: #fd79a8; }
+.cat-tag.other { background: rgba(116,185,255,0.2); color: #74b9ff; }
+
+/* ─── Slide Detail View (heatmap click) ─── */
+.slide-detail-header {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.slide-detail-header h2 { font-size: 1.2rem; font-weight: 700; }
+.back-btn { cursor: pointer; color: var(--accent2); font-weight: 600; font-size: 0.85rem; }
+.back-btn:hover { text-decoration: underline; }
+
+.slide-detail-layout {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 0;
-  align-items: stretch;
+  grid-template-columns: 400px 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
-
-.panel {
+.original-sticky {
+  position: sticky;
+  top: 80px;
+}
+.original-slide-box {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
-
-.panel-header {
-  padding: 1rem 1.5rem;
+.original-slide-box .box-header {
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border);
   font-weight: 700;
-  font-size: 0.9rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 0.85rem;
+  background: linear-gradient(135deg, rgba(231,76,60,0.08), transparent);
+}
+.original-slide-box canvas {
+  width: 100%;
+  display: block;
 }
 
-.panel-header.original { background: linear-gradient(135deg, rgba(231,76,60,0.1), transparent); }
-.panel-header.improved { background: linear-gradient(135deg, rgba(0,206,201,0.1), transparent); }
-
-.panel-body {
-  padding: 1rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.submissions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
 }
-
-.slide-preview {
+.submission-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+.submission-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(108,92,231,0.15);
+}
+.submission-card .card-img {
   width: 100%;
   aspect-ratio: 4/3;
   background: #000;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
 }
-
-.slide-preview canvas {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.slide-preview img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.slide-preview iframe {
+.submission-card .card-img iframe {
   width: 100%;
   height: 100%;
   border: none;
+  pointer-events: none;
+}
+.submission-card .card-body { padding: 0.75rem 1rem; }
+.submission-card .card-name { font-weight: 600; font-size: 0.85rem; }
+.submission-card .card-meta { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
+.submission-card .card-explain {
+  font-size: 0.75rem; color: var(--text-dim); margin-top: 0.5rem;
+  line-height: 1.5; max-height: 60px; overflow: hidden;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
 }
 
-.slide-preview .loading {
-  color: var(--text-dim);
-  font-size: 0.85rem;
+/* Vote mini buttons on cards */
+.card-vote-row {
+  display: flex; gap: 0.5rem; margin-top: 0.6rem; align-items: center;
 }
-
-.vs-divider {
+.card-vote-btn {
+  padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border); background: var(--surface2);
+  color: var(--text-dim); transition: all 0.15s; font-family: inherit;
+}
+.card-vote-btn:hover { border-color: var(--accent); color: var(--text); }
+.card-vote-btn.voted-for { background: rgba(0,184,148,0.2); border-color: var(--green); color: var(--green); pointer-events: none; }
+.card-vote-btn.voted-against { background: rgba(225,112,85,0.15); border-color: var(--red); color: var(--red); pointer-events: none; }
+.card-vote-btn.disabled { opacity: 0.4; pointer-events: none; }
+.vote-mini-bar {
+  flex: 1; height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
 }
+.vote-mini-bar-fill { height: 100%; background: var(--green); transition: width 0.3s; }
 
+/* ─── A/B Comparison ─── */
+.comparison-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;
+}
+.comparison-nav { display: flex; gap: 0.4rem; align-items: center; }
+.comparison-panels {
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+}
+.panel-header {
+  padding: 0.75rem 1rem; border-bottom: 1px solid var(--border);
+  font-weight: 700; font-size: 0.85rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.panel-header.original { background: linear-gradient(135deg, rgba(231,76,60,0.08), transparent); }
+.panel-header.improved { background: linear-gradient(135deg, rgba(0,206,201,0.08), transparent); }
+.panel-body { padding: 0.75rem; flex: 1; display: flex; flex-direction: column; }
+
+.slide-preview {
+  width: 100%; aspect-ratio: 4/3; background: #000; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.slide-preview canvas { max-width: 100%; max-height: 100%; }
+.slide-preview iframe { width: 100%; height: 100%; border: none; }
+.slide-preview .loading { color: var(--text-dim); font-size: 0.8rem; }
+
+.vs-divider { display: flex; align-items: center; justify-content: center; }
 .vs-badge {
-  background: var(--accent);
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.2rem;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 20px rgba(108,92,231,0.4);
+  background: var(--accent); color: #fff; font-weight: 800; font-size: 1rem;
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 15px rgba(108,92,231,0.4);
 }
 
 .submission-info {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: var(--surface2);
-  border-radius: 8px;
-  font-size: 0.8rem;
-  line-height: 1.6;
+  margin-top: 0.75rem; padding: 0.75rem; background: var(--surface2);
+  border-radius: 8px; font-size: 0.75rem; line-height: 1.5;
 }
-
 .submission-info .label {
-  color: var(--text-dim);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.65rem;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.25rem;
+  color: var(--text-dim); font-weight: 600; text-transform: uppercase;
+  font-size: 0.6rem; letter-spacing: 0.5px; margin-bottom: 0.2rem;
 }
+.submission-info p { margin-bottom: 0.5rem; }
 
-.submission-info p { margin-bottom: 0.75rem; }
-
-.category-tags {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
-
-.cat-tag {
-  padding: 0.2rem 0.6rem;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 600;
-}
-
-.cat-tag.factual-fix { background: rgba(225,112,85,0.2); color: var(--cat-factual); }
-.cat-tag.visual-overhaul { background: rgba(108,92,231,0.2); color: var(--cat-visual); }
-.cat-tag.clinical-hook { background: rgba(0,206,201,0.2); color: var(--cat-clinical); }
-.cat-tag.aha-analogy { background: rgba(253,203,110,0.2); color: var(--cat-analogy); }
-.cat-tag.publisher-comparison { background: rgba(253,121,168,0.2); color: var(--cat-publisher); }
-.cat-tag.other { background: rgba(116,185,255,0.2); color: var(--cat-other); }
-
-/* ─── Voting ─── */
 .vote-section {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 2rem 0;
-  align-items: center;
+  display: flex; justify-content: center; gap: 1.5rem;
+  margin: 1.5rem 0; align-items: center;
 }
-
 .vote-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 2px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  font-family: inherit;
-  min-width: 120px;
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  padding: 0.75rem 1.5rem; border-radius: 12px; cursor: pointer;
+  transition: all 0.2s; border: 2px solid var(--border); background: var(--surface);
+  color: var(--text); font-family: inherit; min-width: 110px;
 }
-
-.vote-btn:hover { transform: translateY(-3px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.vote-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
 .vote-btn.original-wins:hover { border-color: var(--red); }
 .vote-btn.improved-wins:hover { border-color: var(--green); }
-.vote-btn.voted { opacity: 0.6; pointer-events: none; }
-.vote-btn .vote-icon { font-size: 2rem; }
-.vote-btn .vote-label { font-size: 0.8rem; font-weight: 600; }
-
-.vote-count {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  text-align: center;
-  margin-top: 0.5rem;
-}
-
-.vote-bar-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
+.vote-btn.voted { opacity: 0.5; pointer-events: none; }
+.vote-btn .vote-icon { font-size: 1.5rem; }
+.vote-btn .vote-label { font-size: 0.7rem; font-weight: 600; }
+.vote-count { font-size: 0.7rem; color: var(--text-dim); text-align: center; }
+.vote-bar-container { display: flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; }
 .vote-bar {
-  flex: 1;
-  height: 8px;
-  border-radius: 4px;
-  background: var(--surface2);
-  overflow: hidden;
-  display: flex;
+  flex: 1; height: 6px; border-radius: 3px; background: var(--surface2);
+  overflow: hidden; display: flex;
 }
-
-.vote-bar-original {
-  background: var(--red);
-  transition: width 0.5s;
-}
-
-.vote-bar-improved {
-  background: var(--green);
-  transition: width 0.5s;
-}
+.vote-bar-original { background: var(--red); transition: width 0.5s; }
+.vote-bar-improved { background: var(--green); transition: width 0.5s; }
 
 /* ─── Study Mode ─── */
-.study-view { display: none; }
-
 .study-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  max-width: 900px;
-  margin: 0 auto;
-  overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; max-width: 900px; margin: 0 auto; overflow: hidden;
 }
-
-.study-progress {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.progress-bar {
-  flex: 1;
-  height: 6px;
-  background: var(--surface2);
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  border-radius: 3px;
-  transition: width 0.3s;
-}
-
-.progress-text {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  font-weight: 600;
-}
-
-.study-body {
-  padding: 2rem;
-}
-
-.study-prompt {
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--accent2);
-}
-
-.study-slide-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
+.study-progress { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--border); }
+.progress-bar { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; transition: width 0.3s; }
+.progress-text { font-size: 0.8rem; color: var(--text-dim); font-weight: 600; }
+.study-body { padding: 1.5rem; }
+.study-prompt { text-align: center; font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: var(--accent2); }
+.study-slide-container { display: flex; justify-content: center; margin-bottom: 1rem; }
 .study-slide-preview {
-  width: 100%;
-  max-width: 700px;
-  aspect-ratio: 4/3;
-  background: #000;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  width: 100%; max-width: 650px; aspect-ratio: 4/3; background: #000;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
-
-.study-slide-preview canvas, .study-slide-preview img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.study-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
+.study-slide-preview canvas { max-width: 100%; max-height: 100%; object-fit: contain; }
+.study-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 1rem; }
 .study-option {
-  padding: 1rem;
-  background: var(--surface2);
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 0.85rem;
-  text-align: center;
-  font-family: inherit;
-  color: var(--text);
+  padding: 0.75rem; background: var(--surface2); border: 2px solid var(--border);
+  border-radius: 10px; cursor: pointer; transition: all 0.2s;
+  font-size: 0.8rem; text-align: center; font-family: inherit; color: var(--text);
 }
-
-.study-option:hover { border-color: var(--accent); transform: translateY(-1px); }
+.study-option:hover { border-color: var(--accent); }
 .study-option.correct { border-color: var(--green); background: rgba(0,184,148,0.15); }
 .study-option.wrong { border-color: var(--red); background: rgba(225,112,85,0.15); }
-
 .reveal-section {
-  display: none;
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background: var(--surface2);
-  border-radius: 10px;
-  border-left: 3px solid var(--accent2);
+  display: none; margin-top: 1rem; padding: 1rem; background: var(--surface2);
+  border-radius: 10px; border-left: 3px solid var(--accent2);
 }
-
-.reveal-section h3 {
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  color: var(--accent2);
-}
-
-.reveal-section p {
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: var(--text-dim);
-}
-
-.study-score {
-  text-align: center;
-  padding: 3rem;
-}
-
+.reveal-section h3 { font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--accent2); }
+.reveal-section p { font-size: 0.75rem; line-height: 1.5; color: var(--text-dim); }
+.study-score { text-align: center; padding: 2rem; }
 .study-score .score-num {
-  font-size: 4rem;
-  font-weight: 800;
+  font-size: 3.5rem; font-weight: 800;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
+.streak-display {
+  position: fixed; top: 70px; right: 2rem; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px; padding: 0.6rem 0.8rem;
+  text-align: center; z-index: 50; display: none;
+}
+.streak-display .streak-num { font-size: 1.3rem; font-weight: 800; color: var(--orange); }
+.streak-display .streak-label { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; }
 
 /* ─── Leaderboard ─── */
-.leaderboard-view { display: none; }
-
-.leaderboard-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 4px;
-}
-
+.leaderboard-table { width: 100%; border-collapse: separate; border-spacing: 0 3px; }
 .leaderboard-table th {
-  text-align: left;
-  padding: 0.75rem 1rem;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-dim);
-  font-weight: 600;
+  text-align: left; padding: 0.6rem 0.75rem; font-size: 0.65rem;
+  text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); font-weight: 600;
 }
-
-.leaderboard-table td {
-  padding: 0.75rem 1rem;
-  background: var(--surface);
-  font-size: 0.85rem;
-}
-
+.leaderboard-table td { padding: 0.6rem 0.75rem; background: var(--surface); font-size: 0.8rem; }
 .leaderboard-table tr td:first-child { border-radius: 8px 0 0 8px; }
 .leaderboard-table tr td:last-child { border-radius: 0 8px 8px 0; }
-
 .rank-badge {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.75rem;
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.7rem;
 }
-
 .rank-1 { background: linear-gradient(135deg, #ffd700, #f0c800); color: #000; }
 .rank-2 { background: linear-gradient(135deg, #c0c0c0, #a8a8a8); color: #000; }
 .rank-3 { background: linear-gradient(135deg, #cd7f32, #b8722a); color: #fff; }
 .rank-other { background: var(--surface2); color: var(--text-dim); }
 
-/* ─── Chapter Detail / Slide Browser ─── */
-.chapter-detail-view { display: none; }
-
-.slide-browser {
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 1.5rem;
+/* ─── XP Bar ─── */
+.xp-bar-wrap {
+  display: flex; align-items: center; gap: 0.5rem;
 }
-
-.slide-list {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem;
-  max-height: 80vh;
-  overflow-y: auto;
+.xp-bar-outer {
+  flex: 1; height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden;
 }
-
-.slide-list-item {
-  padding: 0.6rem 0.8rem;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  transition: all 0.15s;
-  margin-bottom: 2px;
+.xp-bar-inner {
+  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 4px; transition: width 0.5s;
 }
+.xp-text { font-size: 0.7rem; font-weight: 700; color: var(--accent2); min-width: 60px; }
 
-.slide-list-item:hover { background: var(--surface2); }
-.slide-list-item.active { background: var(--accent); color: #fff; }
-
-.slide-list-item .slide-badge {
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.65rem;
-  padding: 0.1rem 0.5rem;
-  border-radius: 10px;
-  font-weight: 700;
+/* ─── Modal (for expanded slide view) ─── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  z-index: 500; align-items: center; justify-content: center; padding: 2rem;
 }
-
-.slide-list-item.active .slide-badge {
-  background: rgba(255,255,255,0.3);
+.modal-overlay.active { display: flex; }
+.modal-content {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  max-width: 1000px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 1.5rem;
 }
-
-/* ─── Filter bar ─── */
-.filter-bar {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+.modal-close {
+  float: right; background: none; border: none; color: var(--text-dim);
+  font-size: 1.5rem; cursor: pointer; padding: 0.25rem 0.5rem;
 }
+.modal-close:hover { color: var(--text); }
 
-.filter-chip {
-  padding: 0.35rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-dim);
-  transition: all 0.2s;
-  font-family: inherit;
+/* ─── Toast ─── */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem; background: var(--accent); color: #fff;
+  padding: 0.75rem 1.25rem; border-radius: 10px; font-size: 0.8rem; font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4); transform: translateY(80px); opacity: 0;
+  transition: all 0.3s; z-index: 1000;
 }
-
-.filter-chip:hover { border-color: var(--accent); color: var(--text); }
-.filter-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.toast.show { transform: translateY(0); opacity: 1; }
 
 /* ─── Animations ─── */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in { animation: fadeIn 0.3s ease-out; }
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.slide-up { animation: slideUp 0.4s ease-out; }
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 0.25s ease-out; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.slide-up { animation: slideUp 0.35s ease-out; }
 
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
   .dashboard-grid { grid-template-columns: 1fr; }
   .chapter-grid { grid-template-columns: repeat(2, 1fr); }
   .comparison-panels { grid-template-columns: 1fr; }
-  .vs-divider { padding: 1rem 0; }
-  .slide-browser { grid-template-columns: 1fr; }
+  .vs-divider { padding: 0.75rem 0; }
+  .slide-detail-layout { grid-template-columns: 1fr; }
+  .original-sticky { position: static; }
   .study-options { grid-template-columns: 1fr; }
   .header-inner { flex-direction: column; align-items: flex-start; }
 }
 
 /* ─── Scrollbar ─── */
-::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
-
-/* ─── Toast ─── */
-.toast {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  background: var(--accent);
-  color: #fff;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-  transform: translateY(100px);
-  opacity: 0;
-  transition: all 0.3s;
-  z-index: 1000;
-}
-
-.toast.show { transform: translateY(0); opacity: 1; }
-
-/* ─── Streak counter ─── */
-.streak-display {
-  position: fixed;
-  top: 80px;
-  right: 2rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
-  text-align: center;
-  z-index: 50;
-  display: none;
-}
-
-.streak-display .streak-num {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--orange);
-}
-
-.streak-display .streak-label {
-  font-size: 0.65rem;
-  color: var(--text-dim);
-  text-transform: uppercase;
-}
-
-/* Supabase status indicator */
-.db-status {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.7rem;
-  color: var(--text-dim);
-}
-
-.db-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--red);
-}
-
-.db-dot.connected { background: var(--green); }
 </style>
 </head>
 <body>
@@ -861,8 +489,9 @@ body {
       <h1>Slide Improvement Showdown</h1>
       <div class="subtitle">BIOL 3000 Biochemistry - Can the students do better?</div>
     </div>
-    <div class="nav-tabs">
+    <div class="nav-tabs" id="navTabs">
       <button class="nav-tab active" data-view="dashboard">Dashboard</button>
+      <button class="nav-tab" data-view="slideDetail">Slide Detail</button>
       <button class="nav-tab" data-view="comparison">A/B Battle</button>
       <button class="nav-tab" data-view="study">Study Quiz</button>
       <button class="nav-tab" data-view="leaderboard">Leaderboard</button>
@@ -874,7 +503,13 @@ body {
       </div>
       <div class="stat">
         <div class="stat-num" id="totalVotes">0</div>
-        <div class="stat-label">Votes Cast</div>
+        <div class="stat-label">Votes</div>
+      </div>
+      <div class="stat">
+        <div class="xp-bar-wrap" style="min-width:100px;">
+          <div class="xp-bar-outer"><div class="xp-bar-inner" id="xpBar" style="width:0%"></div></div>
+          <div class="xp-text" id="xpText">0 XP</div>
+        </div>
       </div>
       <div class="stat">
         <div class="db-status">
@@ -886,74 +521,98 @@ body {
   </div>
 </div>
 
-<!-- ─── Dashboard ─── -->
 <div class="main">
-  <div id="dashboardView">
+  <!-- ─── Dashboard ─── -->
+  <div id="dashboardView" class="view active">
     <div class="dashboard-grid">
       <div class="card" style="grid-column: 1 / -1;">
-        <div class="card-title">Chapters Overview</div>
+        <div class="card-title">Chapters Overview - Click a chapter to filter, or click any heatmap cell below</div>
         <div class="chapter-grid" id="chapterGrid"></div>
       </div>
-
       <div class="card" style="grid-column: 1 / -1;">
-        <div class="card-title">Slide Heatmap - Which slides got the most improvements?</div>
-        <div class="legend" id="heatLegend">
-          <div class="legend-item"><div class="legend-dot" style="background: var(--surface2)"></div> 0</div>
-          <div class="legend-item"><div class="legend-dot" style="background: #2d3a2d"></div> 1</div>
-          <div class="legend-item"><div class="legend-dot" style="background: #3a5a2d"></div> 2-3</div>
-          <div class="legend-item"><div class="legend-dot" style="background: #5a5a2d"></div> 4-5</div>
-          <div class="legend-item"><div class="legend-dot" style="background: #7a2a2d"></div> 6+</div>
+        <div class="card-title">Slide Heatmap - Click any slide to see all submissions</div>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--surface2)"></div> 0</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#2d3a2d"></div> 1</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3a5a2d"></div> 2-3</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#5a5a2d"></div> 4-5</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#7a2a2d"></div> 6+</div>
         </div>
         <div id="heatmapContainer"></div>
       </div>
-
       <div class="card">
-        <div class="card-title">Submissions by Category</div>
+        <div class="card-title">By Category</div>
         <canvas id="categoryChart" height="250"></canvas>
       </div>
-
       <div class="card">
-        <div class="card-title">Submissions by Chapter</div>
+        <div class="card-title">By Chapter</div>
         <canvas id="chapterChart" height="250"></canvas>
       </div>
     </div>
   </div>
 
+  <!-- ─── Slide Detail (gallery) ─── -->
+  <div id="slideDetailView" class="view">
+    <div class="slide-detail-header">
+      <span class="back-btn" onclick="switchView('dashboard')">&larr; Back to Dashboard</span>
+      <h2 id="slideDetailTitle">Chapter 1, Slide 7</h2>
+      <span id="slideDetailCount" style="color:var(--text-dim); font-size:0.85rem;"></span>
+    </div>
+    <div class="slide-detail-layout">
+      <div class="original-sticky">
+        <div class="original-slide-box">
+          <div class="box-header">Original Slide</div>
+          <div id="detailOriginal" style="background:#000; display:flex; align-items:center; justify-content:center; min-height:250px;">
+            <span style="color:var(--text-dim); font-size:0.8rem;">Loading...</span>
+          </div>
+        </div>
+        <div style="margin-top:0.75rem; text-align:center;">
+          <button class="btn" id="detailPrevSlide">&larr; Prev Slide</button>
+          <button class="btn" id="detailNextSlide">Next Slide &rarr;</button>
+        </div>
+      </div>
+      <div>
+        <div id="noSubmissions" style="display:none; text-align:center; padding:3rem; color:var(--text-dim);">
+          No submissions for this slide. Try another!
+        </div>
+        <div class="submissions-grid" id="submissionsGrid"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── A/B Comparison ─── -->
-  <div id="comparisonView" class="comparison-view">
+  <div id="comparisonView" class="view">
     <div class="filter-bar" id="compFilterBar"></div>
     <div class="comparison-header">
       <div class="comparison-nav">
-        <button class="btn" id="prevSub" title="Previous">&larr; Prev</button>
-        <span id="subCounter" style="font-size:0.85rem; color:var(--text-dim); min-width:80px; text-align:center;">1 / 505</span>
-        <button class="btn" id="nextSub" title="Next">Next &rarr;</button>
+        <button class="btn" id="prevSub">&larr;</button>
+        <span id="subCounter" style="font-size:0.8rem; color:var(--text-dim); min-width:70px; text-align:center;"></span>
+        <button class="btn" id="nextSub">&rarr;</button>
         <button class="btn btn-accent" id="randomSub">Random</button>
       </div>
-      <div id="compChapterSelect" style="display:flex; gap:0.5rem; flex-wrap:wrap;"></div>
+      <div id="compChapterSelect" style="display:flex; gap:0.4rem; flex-wrap:wrap;"></div>
     </div>
     <div class="comparison-panels">
       <div class="panel">
         <div class="panel-header original">
-          <span>Original Slide</span>
-          <span id="origSlideLabel" style="font-size:0.75rem; color:var(--text-dim);"></span>
+          <span>Original</span>
+          <span id="origSlideLabel" style="font-size:0.7rem; color:var(--text-dim);"></span>
         </div>
         <div class="panel-body">
           <div class="slide-preview" id="originalPreview">
-            <span class="loading">Loading PDF slide...</span>
+            <span class="loading">Loading...</span>
           </div>
         </div>
       </div>
-      <div class="vs-divider">
-        <div class="vs-badge">VS</div>
-      </div>
+      <div class="vs-divider"><div class="vs-badge">VS</div></div>
       <div class="panel">
         <div class="panel-header improved">
-          <span>Student Improvement</span>
-          <span id="studentName" style="font-size:0.75rem; color:var(--text-dim);"></span>
+          <span>Student Version</span>
+          <span id="studentName" style="font-size:0.7rem; color:var(--text-dim);"></span>
         </div>
         <div class="panel-body">
           <div class="slide-preview" id="improvedPreview">
-            <span class="loading">Loading submission...</span>
+            <span class="loading">Loading...</span>
           </div>
           <div class="submission-info" id="submissionInfo"></div>
         </div>
@@ -962,28 +621,29 @@ body {
     <div class="vote-section">
       <button class="vote-btn original-wins" id="voteOriginal">
         <span class="vote-icon">&#128077;</span>
-        <span class="vote-label">Original is Better</span>
+        <span class="vote-label">Original Wins</span>
       </button>
-      <div style="text-align:center;">
+      <div style="text-align:center; min-width:180px;">
         <div class="vote-count" id="voteCountDisplay">No votes yet</div>
-        <div class="vote-bar-container" style="width:200px; margin-top:0.5rem;">
-          <span style="font-size:0.65rem; color:var(--red);">Orig</span>
+        <div class="vote-bar-container" style="margin-top:0.3rem;">
+          <span style="font-size:0.6rem; color:var(--red);">Orig</span>
           <div class="vote-bar">
             <div class="vote-bar-original" id="voteBarOrig" style="width:50%"></div>
             <div class="vote-bar-improved" id="voteBarImp" style="width:50%"></div>
           </div>
-          <span style="font-size:0.65rem; color:var(--green);">New</span>
+          <span style="font-size:0.6rem; color:var(--green);">New</span>
         </div>
+        <div style="font-size:0.6rem; color:var(--text-dim); margin-top:0.4rem;">Keys: &larr; &rarr; navigate | 1/2 vote | R random</div>
       </div>
       <button class="vote-btn improved-wins" id="voteImproved">
         <span class="vote-icon">&#11088;</span>
-        <span class="vote-label">Improvement Wins!</span>
+        <span class="vote-label">Student Wins!</span>
       </button>
     </div>
   </div>
 
   <!-- ─── Study Quiz ─── -->
-  <div id="studyView" class="study-view">
+  <div id="studyView" class="view">
     <div class="study-card">
       <div class="study-progress">
         <div class="progress-bar"><div class="progress-fill" id="studyProgress" style="width:0%"></div></div>
@@ -991,18 +651,18 @@ body {
       </div>
       <div class="study-body" id="studyBody">
         <div style="text-align:center;">
-          <h2 style="margin-bottom:1rem;">Study Quiz Mode</h2>
-          <p style="color:var(--text-dim); margin-bottom:1.5rem; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.6;">
-            See an original slide and guess what category of improvement a student found. Then review their fix to learn the material!
+          <h2 style="margin-bottom:0.75rem;">Study Quiz Mode</h2>
+          <p style="color:var(--text-dim); margin-bottom:1.5rem; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.5; font-size:0.85rem;">
+            See an original slide and guess what category of improvement a student found. Then review their fix to study!
           </p>
-          <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <div style="display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; margin-bottom:1rem;">
             <button class="btn" id="quiz10">10 Questions</button>
             <button class="btn btn-accent" id="quiz20">20 Questions</button>
-            <button class="btn" id="quizAll">All Slides</button>
+            <button class="btn" id="quizAll">All</button>
           </div>
           <div style="margin-bottom:1rem;">
-            <label style="font-size:0.8rem; color:var(--text-dim);">Filter by chapter:</label>
-            <select id="quizChapterFilter" style="background:var(--surface2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:0.4rem 0.8rem; margin-left:0.5rem; font-family:inherit;">
+            <label style="font-size:0.8rem; color:var(--text-dim);">Chapter:</label>
+            <select id="quizChapterFilter" style="background:var(--surface2); color:var(--text); border:1px solid var(--border); border-radius:6px; padding:0.35rem 0.7rem; margin-left:0.4rem; font-family:inherit; font-size:0.8rem;">
               <option value="all">All Chapters</option>
             </select>
           </div>
@@ -1016,36 +676,41 @@ body {
   </div>
 
   <!-- ─── Leaderboard ─── -->
-  <div id="leaderboardView" class="leaderboard-view">
+  <div id="leaderboardView" class="view">
     <div class="card">
       <div class="card-title">Top Rated Improvements</div>
-      <p style="color:var(--text-dim); font-size:0.8rem; margin-bottom:1rem;">Ranked by community votes. Cast your votes in A/B Battle mode!</p>
+      <p style="color:var(--text-dim); font-size:0.75rem; margin-bottom:0.75rem;">Ranked by community votes. Cast yours in A/B Battle!</p>
       <div class="filter-bar" id="lbFilterBar"></div>
-      <table class="leaderboard-table" id="leaderboardTable">
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Student</th>
-            <th>Chapter</th>
-            <th>Slide</th>
-            <th>Category</th>
-            <th>Votes For</th>
-            <th>Win Rate</th>
-          </tr>
-        </thead>
+      <table class="leaderboard-table">
+        <thead><tr>
+          <th>Rank</th><th>Student</th><th>Chapter</th><th>Slide</th><th>Category</th><th>Votes</th><th>Win Rate</th>
+        </tr></thead>
         <tbody id="leaderboardBody"></tbody>
       </table>
     </div>
   </div>
 </div>
 
+<!-- ─── Expanded image modal ─── -->
+<div class="modal-overlay" id="imageModal">
+  <div class="modal-content" id="imageModalContent">
+    <button class="modal-close" id="imageModalClose">&times;</button>
+    <div id="imageModalBody" style="text-align:center;"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-// ─── Configuration ───
+// ─── Config ───
 const SUPABASE_URL = 'https://pyvdmhzsqsirnpzeybrp.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB5dmRtaHpzcXNpcm5wemV5YnJwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NTA0ODIsImV4cCI6MjA4NjAyNjQ4Mn0.uC3G6F6rFvcZVO_RHuGIw4xhBUxW6q_no7mw86Ho1ZY';
-const PDF_BASE_PATH = 'slide pdfs without presenter notes/';
+const PDF_BASE = 'slide pdfs without presenter notes/';
+
+const CHAPTER_NAMES = {
+  1:'Unity of Life', 2:'Water & pH', 3:'Amino Acids', 4:'Protein Folding',
+  5:'Hemoglobin', 6:'Techniques', 7:'Enzymes', 8:'Enzyme Kinetics'
+};
 
 // ─── State ───
 let appData = null;
@@ -1053,23 +718,28 @@ let currentSubIndex = 0;
 let filteredSubs = [];
 let activeCategory = null;
 let activeChapter = null;
-let votes = {}; // submissionId -> { original: n, improved: n }
-let myVotes = {}; // submissionId -> 'original' | 'improved'
-let pdfCache = {}; // chapterPdf -> PDFDocumentProxy
+let votes = {};
+let myVotes = {};
+let pdfCache = {};
 let studyState = null;
 let supabase = null;
 let dbConnected = false;
+let xp = 0;
+let detailChapter = null;
+let detailSlide = null;
 
-// ─── PDF.js Setup ───
+// ─── PDF.js ───
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-// ─── Initialize ───
+// ─── Init ───
 async function init() {
   const resp = await fetch('app_data.json');
   appData = await resp.json();
-
   document.getElementById('totalSubs').textContent = appData.totalSubmissions;
   filteredSubs = [...appData.submissions];
+
+  xp = parseInt(localStorage.getItem('xp') || '0');
+  updateXP(0);
 
   initSupabase();
   renderDashboard();
@@ -1077,32 +747,36 @@ async function init() {
   setupComparison();
   setupStudyMode();
   setupLeaderboard();
+  setupModal();
+}
+
+// ─── XP System ───
+function updateXP(add) {
+  xp += add;
+  localStorage.setItem('xp', xp);
+  const level = Math.floor(xp / 100) + 1;
+  const pct = (xp % 100);
+  document.getElementById('xpBar').style.width = pct + '%';
+  document.getElementById('xpText').textContent = `Lvl ${level} (${xp} XP)`;
+  if (add > 0 && pct < add) {
+    showToast(`Level up! You're now Level ${level}!`);
+  }
 }
 
 // ─── Supabase ───
 async function initSupabase() {
   const dot = document.getElementById('dbDot');
   const label = document.getElementById('dbLabel');
-
-  if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
-    // Fallback to localStorage
-    dot.classList.remove('connected');
-    label.textContent = 'Local mode';
-    loadLocalVotes();
-    return;
-  }
-
   try {
-    // Dynamic import of Supabase
     const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
     supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     dbConnected = true;
     dot.classList.add('connected');
-    label.textContent = 'Live voting';
+    label.textContent = 'Live';
     await loadVotesFromDB();
   } catch (e) {
     console.error('Supabase init failed:', e);
-    label.textContent = 'Local mode';
+    label.textContent = 'Local';
     loadLocalVotes();
   }
 }
@@ -1130,11 +804,10 @@ async function loadVotesFromDB() {
       if (!votes[row.submission_id]) votes[row.submission_id] = { original: 0, improved: 0 };
       votes[row.submission_id][row.vote_type] = (votes[row.submission_id][row.vote_type] || 0) + 1;
     });
-    // Load user's own votes from localStorage for "already voted" state
     myVotes = JSON.parse(localStorage.getItem('myVotes') || '{}');
     updateTotalVoteCount();
   } catch(e) {
-    console.error('Failed to load votes:', e);
+    console.error('Load votes failed:', e);
     loadLocalVotes();
   }
 }
@@ -1145,108 +818,72 @@ async function castVote(submissionId, voteType) {
   myVotes[submissionId] = voteType;
   localStorage.setItem('myVotes', JSON.stringify(myVotes));
   updateTotalVoteCount();
+  updateXP(5);
 
   if (supabase && dbConnected) {
     try {
-      const sessionId = getSessionId();
       await supabase.from('votes').insert({
         submission_id: submissionId,
         vote_type: voteType,
-        session_id: sessionId
+        session_id: getSessionId()
       });
-    } catch(e) {
-      console.error('Vote save failed:', e);
-    }
+    } catch(e) { console.error('Vote save failed:', e); }
   }
-
   saveLocalVotes();
 }
 
 function getSessionId() {
   let sid = localStorage.getItem('sessionId');
-  if (!sid) {
-    sid = 'sess_' + Math.random().toString(36).substr(2,12);
-    localStorage.setItem('sessionId', sid);
-  }
+  if (!sid) { sid = 'sess_' + Math.random().toString(36).substr(2,12); localStorage.setItem('sessionId', sid); }
   return sid;
 }
 
 function updateTotalVoteCount() {
   let total = 0;
-  Object.values(votes).forEach(v => { total += (v.original || 0) + (v.improved || 0); });
+  Object.values(votes).forEach(v => { total += (v.original||0) + (v.improved||0); });
   document.getElementById('totalVotes').textContent = total;
 }
 
 // ─── Navigation ───
+function switchView(viewName) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(viewName + 'View').classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.view === viewName);
+  });
+  if (viewName === 'comparison') showComparison(currentSubIndex);
+  if (viewName === 'leaderboard') renderLeaderboard();
+}
+
 function setupNavigation() {
   document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const view = tab.dataset.view;
-      document.getElementById('dashboardView').style.display = view === 'dashboard' ? '' : 'none';
-      document.getElementById('comparisonView').style.display = view === 'comparison' ? '' : 'none';
-      document.getElementById('studyView').style.display = view === 'study' ? '' : 'none';
-      document.getElementById('leaderboardView').style.display = view === 'leaderboard' ? '' : 'none';
-
-      if (view === 'comparison') showComparison(currentSubIndex);
-      if (view === 'leaderboard') renderLeaderboard();
-    });
+    tab.addEventListener('click', () => switchView(tab.dataset.view));
   });
 }
 
 // ─── Dashboard ───
 function renderDashboard() {
-  // Chapter cards
   const grid = document.getElementById('chapterGrid');
-  const chNums = Object.keys(appData.chapters).sort((a,b) => a - b);
-
-  const chapterNames = {
-    1: 'Unity of Life',
-    2: 'Water & pH',
-    3: 'Amino Acids',
-    4: 'Protein Folding',
-    5: 'Hemoglobin',
-    6: 'Techniques',
-    7: 'Enzymes',
-    8: 'Enzyme Kinetics'
-  };
+  const chNums = Object.keys(appData.chapters).sort((a,b) => a-b);
 
   grid.innerHTML = chNums.map(n => {
     const ch = appData.chapters[n];
-    return `
-      <div class="chapter-card" onclick="jumpToChapter(${n})">
-        <div class="ch-num">${n}</div>
-        <div class="ch-name">${chapterNames[n] || ch.name}</div>
-        <div class="ch-stats">${ch.totalSubmissions} submissions</div>
-        <div style="font-size:0.65rem; color:var(--text-dim); margin-top:0.2rem;">${ch.totalPages} slides</div>
-      </div>
-    `;
+    return `<div class="chapter-card" onclick="jumpToChapter(${n})">
+      <div class="ch-num">${n}</div>
+      <div class="ch-name">${CHAPTER_NAMES[n]}</div>
+      <div class="ch-stats">${ch.totalSubmissions} submissions</div>
+      <div style="font-size:0.6rem; color:var(--text-dim); margin-top:0.15rem;">${ch.totalPages} slides</div>
+    </div>`;
   }).join('');
 
-  // Heatmap
   renderHeatmap();
-
-  // Charts
   renderCategoryChart();
   renderChapterChart();
 }
 
 function renderHeatmap() {
   const container = document.getElementById('heatmapContainer');
-  const chNums = Object.keys(appData.chapters).sort((a,b) => a - b);
-
-  const chapterNames = {
-    1: 'Ch 1: Unity of Life',
-    2: 'Ch 2: Water & pH',
-    3: 'Ch 3: Amino Acids',
-    4: 'Ch 4: Protein Folding',
-    5: 'Ch 5: Hemoglobin',
-    6: 'Ch 6: Techniques',
-    7: 'Ch 7: Enzymes',
-    8: 'Ch 8: Enzyme Kinetics'
-  };
+  const chNums = Object.keys(appData.chapters).sort((a,b) => a-b);
 
   container.innerHTML = chNums.map(n => {
     const ch = appData.chapters[n];
@@ -1259,88 +896,165 @@ function renderHeatmap() {
       else if (count >= 3) heat = 'heat-4';
       else if (count >= 2) heat = 'heat-3';
       else if (count >= 1) heat = 'heat-1';
-      cells.push(`<div class="heatmap-cell ${heat}" title="Ch ${n}, Slide ${s}: ${count} submission${count!==1?'s':''}" onclick="jumpToSlide(${n},${s})">${s}</div>`);
+      cells.push(`<div class="heatmap-cell ${heat}" title="Ch ${n}, Slide ${s}: ${count} submission${count!==1?'s':''}" onclick="openSlideDetail(${n},${s})">${s}</div>`);
     }
-    return `
-      <div class="heatmap-chapter-title">${chapterNames[n]} (${ch.totalSubmissions} submissions)</div>
-      <div class="heatmap-row">${cells.join('')}</div>
-    `;
+    return `<div class="heatmap-chapter-title">Ch ${n}: ${CHAPTER_NAMES[n]} (${ch.totalSubmissions} submissions)</div>
+      <div class="heatmap-row">${cells.join('')}</div>`;
   }).join('');
 }
 
 function renderCategoryChart() {
   const ctx = document.getElementById('categoryChart').getContext('2d');
   const cats = {};
-  appData.submissions.forEach(s => {
-    s.categories.forEach(c => { cats[c] = (cats[c] || 0) + 1; });
-  });
-
-  const labels = Object.keys(cats).sort((a,b) => cats[b] - cats[a]);
-  const colors = {
-    'Factual Fix': '#e17055',
-    'Visual Overhaul': '#6c5ce7',
-    'Clinical Hook': '#00cec9',
-    'Aha! Analogy': '#fdcb6e',
-    'Publisher Comparison': '#fd79a8',
-    'Other': '#74b9ff'
-  };
-
+  appData.submissions.forEach(s => s.categories.forEach(c => { cats[c] = (cats[c]||0)+1; }));
+  const labels = Object.keys(cats).sort((a,b) => cats[b]-cats[a]);
+  const colors = { 'Factual Fix':'#e17055','Visual Overhaul':'#6c5ce7','Clinical Hook':'#00cec9','Aha! Analogy':'#fdcb6e','Publisher Comparison':'#fd79a8','Other':'#74b9ff' };
   new Chart(ctx, {
     type: 'doughnut',
-    data: {
-      labels: labels,
-      datasets: [{
-        data: labels.map(l => cats[l]),
-        backgroundColor: labels.map(l => colors[l] || '#74b9ff'),
-        borderWidth: 0,
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { color: '#8b8fa3', font: { size: 11 }, padding: 12 }
-        }
-      }
-    }
+    data: { labels, datasets: [{ data: labels.map(l => cats[l]), backgroundColor: labels.map(l => colors[l]||'#74b9ff'), borderWidth: 0 }] },
+    options: { responsive: true, plugins: { legend: { position:'bottom', labels: { color:'#8b8fa3', font:{size:11}, padding:10 } } } }
   });
 }
 
 function renderChapterChart() {
   const ctx = document.getElementById('chapterChart').getContext('2d');
-  const chNums = Object.keys(appData.chapters).sort((a,b) => a - b);
-  const shortNames = ['Unity','Water','AAs','Protein','Hb','Tech','Enzymes','Kinetics'];
-
+  const chNums = Object.keys(appData.chapters).sort((a,b) => a-b);
+  const short = ['Unity','Water','AAs','Protein','Hb','Tech','Enzymes','Kinetics'];
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: chNums.map((n,i) => `Ch ${n}: ${shortNames[i]}`),
-      datasets: [{
-        label: 'Submissions',
-        data: chNums.map(n => appData.chapters[n].totalSubmissions),
-        backgroundColor: [
-          '#e17055','#6c5ce7','#00cec9','#fdcb6e','#fd79a8','#74b9ff','#00b894','#a29bfe'
-        ],
-        borderRadius: 6,
-      }]
+      labels: chNums.map((n,i) => `Ch ${n}`),
+      datasets: [{ label:'Submissions', data: chNums.map(n => appData.chapters[n].totalSubmissions),
+        backgroundColor: ['#e17055','#6c5ce7','#00cec9','#fdcb6e','#fd79a8','#74b9ff','#00b894','#a29bfe'], borderRadius: 6 }]
     },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false }
-      },
-      scales: {
-        y: {
-          ticks: { color: '#8b8fa3' },
-          grid: { color: '#2e3347' }
-        },
-        x: {
-          ticks: { color: '#8b8fa3', font: { size: 10 } },
-          grid: { display: false }
-        }
-      }
+    options: { responsive: true, plugins: { legend:{display:false} },
+      scales: { y: { ticks:{color:'#8b8fa3'}, grid:{color:'#2e3347'} }, x: { ticks:{color:'#8b8fa3',font:{size:10}}, grid:{display:false} } }
     }
+  });
+}
+
+// ─── Slide Detail View ───
+async function openSlideDetail(chNum, slideNum) {
+  detailChapter = chNum;
+  detailSlide = slideNum;
+  switchView('slideDetail');
+  await renderSlideDetail();
+}
+
+async function renderSlideDetail() {
+  const ch = appData.chapters[detailChapter];
+  document.getElementById('slideDetailTitle').textContent = `Ch ${detailChapter}: ${CHAPTER_NAMES[detailChapter]}, Slide ${detailSlide}`;
+
+  // Find all submissions for this slide
+  const subs = appData.submissions.filter(s => s.chapterNum === detailChapter && s.slideNum === detailSlide);
+  document.getElementById('slideDetailCount').textContent = `${subs.length} submission${subs.length!==1?'s':''}`;
+
+  // Render original PDF
+  const origContainer = document.getElementById('detailOriginal');
+  origContainer.innerHTML = '<span style="color:var(--text-dim);font-size:0.8rem;">Loading...</span>';
+  try {
+    if (!pdfCache[ch.pdf]) {
+      pdfCache[ch.pdf] = await pdfjsLib.getDocument(PDF_BASE + ch.pdf).promise;
+    }
+    const pdf = pdfCache[ch.pdf];
+    const pageNum = Math.min(detailSlide, pdf.numPages);
+    const page = await pdf.getPage(pageNum);
+    const vp = page.getViewport({ scale: 1 });
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const scale = 400 / vp.width;
+    const svp = page.getViewport({ scale });
+    canvas.width = svp.width;
+    canvas.height = svp.height;
+    await page.render({ canvasContext: ctx, viewport: svp }).promise;
+    origContainer.innerHTML = '';
+    origContainer.appendChild(canvas);
+  } catch(e) {
+    origContainer.innerHTML = '<span style="color:var(--text-dim);">Could not load</span>';
+  }
+
+  // Render submissions grid
+  const grid = document.getElementById('submissionsGrid');
+  const noSubs = document.getElementById('noSubmissions');
+  if (subs.length === 0) {
+    grid.innerHTML = '';
+    noSubs.style.display = '';
+    return;
+  }
+  noSubs.style.display = 'none';
+
+  grid.innerHTML = subs.map(s => {
+    const catTags = s.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join('');
+    const v = votes[s.id] || { original:0, improved:0 };
+    const total = v.original + v.improved;
+    const winPct = total > 0 ? Math.round((v.improved/total)*100) : 50;
+    const myVote = myVotes[s.id];
+
+    return `<div class="submission-card fade-in">
+      <div class="card-img" onclick="expandSubmission(${s.id})">
+        <iframe src="https://drive.google.com/file/d/${s.driveId}/preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-name">${esc(s.name)} <span style="color:var(--text-dim);font-size:0.7rem;">Pod ${s.pod}</span></div>
+        <div class="category-tags" style="margin-top:0.3rem;">${catTags}</div>
+        <div class="card-explain">${esc(s.explanation)}</div>
+        <div class="card-vote-row">
+          <button class="card-vote-btn ${myVote==='original'?'voted-against':myVote?'disabled':''}" onclick="cardVote(${s.id},'original',this)">Original</button>
+          <div class="vote-mini-bar"><div class="vote-mini-bar-fill" style="width:${winPct}%"></div></div>
+          <button class="card-vote-btn ${myVote==='improved'?'voted-for':myVote?'disabled':''}" onclick="cardVote(${s.id},'improved',this)">Student</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Prev/next slide buttons
+  document.getElementById('detailPrevSlide').onclick = () => {
+    if (detailSlide > 1) { detailSlide--; renderSlideDetail(); }
+  };
+  document.getElementById('detailNextSlide').onclick = () => {
+    if (detailSlide < ch.totalPages) { detailSlide++; renderSlideDetail(); }
+  };
+}
+
+function cardVote(subId, voteType, btnEl) {
+  if (myVotes[subId]) return;
+  castVote(subId, voteType);
+  // Re-render the card's vote row
+  const card = btnEl.closest('.submission-card');
+  const row = card.querySelector('.card-vote-row');
+  const v = votes[subId] || { original:0, improved:0 };
+  const total = v.original + v.improved;
+  const winPct = total > 0 ? Math.round((v.improved/total)*100) : 50;
+  row.innerHTML = `
+    <button class="card-vote-btn ${voteType==='original'?'voted-against':'disabled'}">Original</button>
+    <div class="vote-mini-bar"><div class="vote-mini-bar-fill" style="width:${winPct}%"></div></div>
+    <button class="card-vote-btn ${voteType==='improved'?'voted-for':'disabled'}">Student</button>
+  `;
+  showToast('+5 XP!');
+}
+
+function expandSubmission(subId) {
+  const sub = appData.submissions.find(s => s.id === subId);
+  if (!sub) return;
+  const modal = document.getElementById('imageModal');
+  const body = document.getElementById('imageModalBody');
+  body.innerHTML = `
+    <iframe src="https://drive.google.com/file/d/${sub.driveId}/preview" style="width:100%;height:70vh;border:none;border-radius:8px;" allow="autoplay"></iframe>
+    <div style="margin-top:1rem; text-align:left;">
+      <strong>${esc(sub.name)}</strong> (Pod ${sub.pod}) &mdash; ${sub.chapter}, Slide ${sub.slideRaw}
+      <div class="category-tags" style="margin-top:0.5rem;">${sub.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join('')}</div>
+      <p style="margin-top:0.75rem; font-size:0.8rem; line-height:1.5; color:var(--text-dim);">${esc(sub.explanation)}</p>
+    </div>
+  `;
+  modal.classList.add('active');
+}
+
+function setupModal() {
+  document.getElementById('imageModalClose').addEventListener('click', () => {
+    document.getElementById('imageModal').classList.remove('active');
+  });
+  document.getElementById('imageModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) e.currentTarget.classList.remove('active');
   });
 }
 
@@ -1348,27 +1062,16 @@ function renderChapterChart() {
 function jumpToChapter(chNum) {
   activeChapter = chNum;
   filterSubmissions();
-  document.querySelector('[data-view="comparison"]').click();
-}
-
-function jumpToSlide(chNum, slideNum) {
-  activeChapter = chNum;
-  filterSubmissions();
-  // Find first submission matching this slide
-  const idx = filteredSubs.findIndex(s => s.chapterNum === chNum && s.slideNum === slideNum);
-  if (idx >= 0) currentSubIndex = idx;
-  document.querySelector('[data-view="comparison"]').click();
+  currentSubIndex = 0;
+  switchView('comparison');
 }
 
 // ─── A/B Comparison ───
 function setupComparison() {
-  // Chapter filter chips
   const bar = document.getElementById('compChapterSelect');
-  const shortNames = {1:'Ch1',2:'Ch2',3:'Ch3',4:'Ch4',5:'Ch5',6:'Ch6',7:'Ch7',8:'Ch8'};
-
   bar.innerHTML = `<button class="filter-chip active" data-ch="all">All</button>` +
     Object.keys(appData.chapters).sort((a,b)=>a-b).map(n =>
-      `<button class="filter-chip" data-ch="${n}">${shortNames[n]}</button>`
+      `<button class="filter-chip" data-ch="${n}">Ch${n}</button>`
     ).join('');
 
   bar.querySelectorAll('.filter-chip').forEach(chip => {
@@ -1376,52 +1079,35 @@ function setupComparison() {
       bar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       activeChapter = chip.dataset.ch === 'all' ? null : parseInt(chip.dataset.ch);
-      filterSubmissions();
-      currentSubIndex = 0;
-      showComparison(0);
+      filterSubmissions(); currentSubIndex = 0; showComparison(0);
     });
   });
 
-  // Category filter
   const catBar = document.getElementById('compFilterBar');
-  const cats = ['All', 'Factual Fix', 'Visual Overhaul', 'Clinical Hook', 'Aha! Analogy', 'Publisher Comparison'];
-  catBar.innerHTML = cats.map(c =>
-    `<button class="filter-chip ${c==='All'?'active':''}" data-cat="${c}">${c}</button>`
-  ).join('');
-
+  const cats = ['All','Factual Fix','Visual Overhaul','Clinical Hook','Aha! Analogy','Publisher Comparison'];
+  catBar.innerHTML = cats.map(c => `<button class="filter-chip ${c==='All'?'active':''}" data-cat="${c}">${c}</button>`).join('');
   catBar.querySelectorAll('.filter-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       catBar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       activeCategory = chip.dataset.cat === 'All' ? null : chip.dataset.cat;
-      filterSubmissions();
-      currentSubIndex = 0;
-      showComparison(0);
+      filterSubmissions(); currentSubIndex = 0; showComparison(0);
     });
   });
 
-  document.getElementById('prevSub').addEventListener('click', () => {
-    if (currentSubIndex > 0) showComparison(--currentSubIndex);
-  });
-  document.getElementById('nextSub').addEventListener('click', () => {
-    if (currentSubIndex < filteredSubs.length - 1) showComparison(++currentSubIndex);
-  });
-  document.getElementById('randomSub').addEventListener('click', () => {
-    currentSubIndex = Math.floor(Math.random() * filteredSubs.length);
-    showComparison(currentSubIndex);
-  });
-
+  document.getElementById('prevSub').addEventListener('click', () => { if (currentSubIndex > 0) showComparison(--currentSubIndex); });
+  document.getElementById('nextSub').addEventListener('click', () => { if (currentSubIndex < filteredSubs.length-1) showComparison(++currentSubIndex); });
+  document.getElementById('randomSub').addEventListener('click', () => { currentSubIndex = Math.floor(Math.random()*filteredSubs.length); showComparison(currentSubIndex); });
   document.getElementById('voteOriginal').addEventListener('click', () => handleVote('original'));
   document.getElementById('voteImproved').addEventListener('click', () => handleVote('improved'));
 
-  // Keyboard navigation
   document.addEventListener('keydown', e => {
-    if (document.getElementById('comparisonView').style.display === 'none') return;
+    if (!document.getElementById('comparisonView').classList.contains('active')) return;
     if (e.key === 'ArrowLeft') document.getElementById('prevSub').click();
     if (e.key === 'ArrowRight') document.getElementById('nextSub').click();
     if (e.key === '1') document.getElementById('voteOriginal').click();
     if (e.key === '2') document.getElementById('voteImproved').click();
-    if (e.key === 'r') document.getElementById('randomSub').click();
+    if (e.key === 'r' || e.key === 'R') document.getElementById('randomSub').click();
   });
 }
 
@@ -1435,134 +1121,70 @@ function filterSubmissions() {
 
 async function showComparison(idx) {
   if (filteredSubs.length === 0) {
-    document.getElementById('subCounter').textContent = 'No submissions match filter';
+    document.getElementById('subCounter').textContent = 'No matches';
     return;
   }
-
-  idx = Math.max(0, Math.min(idx, filteredSubs.length - 1));
+  idx = Math.max(0, Math.min(idx, filteredSubs.length-1));
   currentSubIndex = idx;
   const sub = filteredSubs[idx];
 
-  document.getElementById('subCounter').textContent = `${idx + 1} / ${filteredSubs.length}`;
+  document.getElementById('subCounter').textContent = `${idx+1} / ${filteredSubs.length}`;
   document.getElementById('origSlideLabel').textContent = `${sub.chapter} - Slide ${sub.slideRaw}`;
   document.getElementById('studentName').textContent = `${sub.name} (Pod ${sub.pod})`;
 
-  // Render original PDF slide
-  await renderPdfSlide(sub);
+  renderPdfSlide(sub, 'originalPreview');
+  renderDrivePreview(sub, 'improvedPreview');
 
-  // Render student submission
-  renderStudentSubmission(sub);
-
-  // Show submission info
-  const catTags = sub.categories.map(c => {
-    const cls = c.toLowerCase().replace(/[^a-z]/g, '-').replace(/--+/g, '-');
-    return `<span class="cat-tag ${cls}">${c}</span>`;
-  }).join('');
-
+  const catTags = sub.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join('');
   document.getElementById('submissionInfo').innerHTML = `
     <div class="label">Category</div>
     <div class="category-tags">${catTags}</div>
-    <div class="label" style="margin-top:0.75rem;">Why is this better?</div>
-    <p>${escapeHtml(sub.explanation)}</p>
-    ${sub.notes ? `<div class="label">Presenter Notes</div><p style="max-height:150px; overflow-y:auto;">${escapeHtml(sub.notes).substring(0, 500)}${sub.notes.length > 500 ? '...' : ''}</p>` : ''}
+    <div class="label" style="margin-top:0.5rem;">Why is this better?</div>
+    <p>${esc(sub.explanation)}</p>
+    ${sub.notes ? `<div class="label">Notes</div><p style="max-height:120px;overflow-y:auto;">${esc(sub.notes).substring(0,400)}${sub.notes.length>400?'...':''}</p>` : ''}
   `;
-
-  // Update vote display
   updateVoteDisplay(sub.id);
 }
 
-async function renderPdfSlide(sub) {
-  const container = document.getElementById('originalPreview');
-  container.innerHTML = '<span class="loading">Loading original slide...</span>';
-
-  if (!sub.chapterPdf || !sub.slideNum) {
-    container.innerHTML = '<span class="loading">Slide reference not available</span>';
-    return;
-  }
-
+async function renderPdfSlide(sub, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '<span class="loading">Loading slide...</span>';
+  if (!sub.chapterPdf || !sub.slideNum) { container.innerHTML = '<span class="loading">No slide ref</span>'; return; }
   try {
-    if (!pdfCache[sub.chapterPdf]) {
-      const loadingTask = pdfjsLib.getDocument(PDF_BASE_PATH + sub.chapterPdf);
-      pdfCache[sub.chapterPdf] = await loadingTask.promise;
-    }
-
+    if (!pdfCache[sub.chapterPdf]) pdfCache[sub.chapterPdf] = await pdfjsLib.getDocument(PDF_BASE + sub.chapterPdf).promise;
     const pdf = pdfCache[sub.chapterPdf];
-    const pageNum = Math.min(sub.slideNum, pdf.numPages);
-    const page = await pdf.getPage(pageNum);
-
-    const viewport = page.getViewport({ scale: 1 });
+    const page = await pdf.getPage(Math.min(sub.slideNum, pdf.numPages));
+    const vp = page.getViewport({ scale: 1 });
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-
-    // Scale to fit container
-    const containerWidth = container.clientWidth || 600;
-    const scale = containerWidth / viewport.width;
-    const scaledViewport = page.getViewport({ scale: scale });
-
-    canvas.width = scaledViewport.width;
-    canvas.height = scaledViewport.height;
-
-    await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
-
+    const scale = (container.clientWidth || 550) / vp.width;
+    const svp = page.getViewport({ scale });
+    canvas.width = svp.width; canvas.height = svp.height;
+    await page.render({ canvasContext: ctx, viewport: svp }).promise;
     container.innerHTML = '';
     container.appendChild(canvas);
-  } catch (e) {
-    console.error('PDF render error:', e);
-    container.innerHTML = '<span class="loading">Could not load slide</span>';
-  }
+  } catch(e) { container.innerHTML = '<span class="loading">Could not load</span>'; }
 }
 
-function renderStudentSubmission(sub) {
-  const container = document.getElementById('improvedPreview');
-
-  if (!sub.driveId) {
-    container.innerHTML = '<span class="loading">No file uploaded</span>';
-    return;
-  }
-
-  // Use Google Drive preview - works for images, PDFs, and PPTX
-  // Try thumbnail first (faster), fall back to preview iframe
-  const thumbnailUrl = `https://drive.google.com/thumbnail?id=${sub.driveId}&sz=w800`;
-  const previewUrl = `https://drive.google.com/file/d/${sub.driveId}/preview`;
-
-  const img = document.createElement('img');
-  img.src = thumbnailUrl;
-  img.alt = 'Student submission';
-  img.style.maxWidth = '100%';
-  img.style.maxHeight = '100%';
-  img.style.objectFit = 'contain';
-
-  img.onerror = () => {
-    // Fall back to iframe preview
-    container.innerHTML = `<iframe src="${previewUrl}" style="width:100%;height:100%;border:none;" allow="autoplay"></iframe>`;
-  };
-
-  container.innerHTML = '';
-  container.appendChild(img);
+function renderDrivePreview(sub, containerId) {
+  const container = document.getElementById(containerId);
+  if (!sub.driveId) { container.innerHTML = '<span class="loading">No file</span>'; return; }
+  // Use Google Drive's preview iframe — works for PPTX, PDF, images
+  container.innerHTML = `<iframe src="https://drive.google.com/file/d/${sub.driveId}/preview" style="width:100%;height:100%;border:none;" allow="autoplay" loading="lazy"></iframe>`;
 }
 
 function handleVote(voteType) {
   const sub = filteredSubs[currentSubIndex];
-  if (!sub || myVotes[sub.id]) return; // Already voted
-
+  if (!sub || myVotes[sub.id]) return;
   castVote(sub.id, voteType);
   updateVoteDisplay(sub.id);
-
-  // Visual feedback
-  showToast(voteType === 'improved' ? 'Voted: Student wins!' : 'Voted: Original wins!');
-
-  // Auto-advance after a short delay
-  setTimeout(() => {
-    if (currentSubIndex < filteredSubs.length - 1) {
-      showComparison(++currentSubIndex);
-    }
-  }, 1200);
+  showToast(voteType === 'improved' ? 'Student wins! +5 XP' : 'Original wins! +5 XP');
+  setTimeout(() => { if (currentSubIndex < filteredSubs.length-1) showComparison(++currentSubIndex); }, 1000);
 }
 
 function updateVoteDisplay(subId) {
-  const v = votes[subId] || { original: 0, improved: 0 };
+  const v = votes[subId] || { original:0, improved:0 };
   const total = v.original + v.improved;
-
   const countEl = document.getElementById('voteCountDisplay');
   const barOrig = document.getElementById('voteBarOrig');
   const barImp = document.getElementById('voteBarImp');
@@ -1570,199 +1192,149 @@ function updateVoteDisplay(subId) {
   const btnImp = document.getElementById('voteImproved');
 
   if (total === 0) {
-    countEl.textContent = 'No votes yet - be the first!';
-    barOrig.style.width = '50%';
-    barImp.style.width = '50%';
+    countEl.textContent = 'No votes yet - be first!';
+    barOrig.style.width = '50%'; barImp.style.width = '50%';
   } else {
-    const origPct = Math.round((v.original / total) * 100);
-    const impPct = 100 - origPct;
-    countEl.textContent = `${total} vote${total!==1?'s':''}: Original ${origPct}% vs Improved ${impPct}%`;
-    barOrig.style.width = origPct + '%';
-    barImp.style.width = impPct + '%';
+    const origPct = Math.round((v.original/total)*100);
+    countEl.textContent = `${total} vote${total!==1?'s':''}: ${origPct}% vs ${100-origPct}%`;
+    barOrig.style.width = origPct+'%'; barImp.style.width = (100-origPct)+'%';
   }
 
-  // Show if already voted
-  const alreadyVoted = myVotes[subId];
-  btnOrig.classList.toggle('voted', !!alreadyVoted);
-  btnImp.classList.toggle('voted', !!alreadyVoted);
-
-  if (alreadyVoted === 'original') {
-    btnOrig.style.borderColor = 'var(--red)';
-    btnOrig.style.opacity = '1';
-  } else if (alreadyVoted === 'improved') {
-    btnImp.style.borderColor = 'var(--green)';
-    btnImp.style.opacity = '1';
-  } else {
-    btnOrig.style.borderColor = '';
-    btnOrig.style.opacity = '';
-    btnImp.style.borderColor = '';
-    btnImp.style.opacity = '';
-  }
+  const voted = myVotes[subId];
+  btnOrig.classList.toggle('voted', !!voted);
+  btnImp.classList.toggle('voted', !!voted);
+  btnOrig.style.borderColor = voted==='original' ? 'var(--red)' : '';
+  btnOrig.style.opacity = voted==='original' ? '1' : '';
+  btnImp.style.borderColor = voted==='improved' ? 'var(--green)' : '';
+  btnImp.style.opacity = voted==='improved' ? '1' : '';
 }
 
-// ─── Study Quiz Mode ───
+// ─── Study Quiz ───
 function setupStudyMode() {
   const sel = document.getElementById('quizChapterFilter');
   Object.keys(appData.chapters).sort((a,b)=>a-b).forEach(n => {
     const opt = document.createElement('option');
-    opt.value = n;
-    opt.textContent = appData.chapters[n].name;
+    opt.value = n; opt.textContent = `Ch ${n}: ${CHAPTER_NAMES[n]}`;
     sel.appendChild(opt);
   });
-
   document.getElementById('quiz10').addEventListener('click', () => startQuiz(10));
   document.getElementById('quiz20').addEventListener('click', () => startQuiz(20));
   document.getElementById('quizAll').addEventListener('click', () => startQuiz(0));
 }
 
-function startQuiz(numQuestions) {
+function startQuiz(num) {
   const chFilter = document.getElementById('quizChapterFilter').value;
   let pool = appData.submissions.filter(s => s.slideNum && s.chapterPdf);
-  if (chFilter !== 'all') {
-    pool = pool.filter(s => s.chapterNum === parseInt(chFilter));
-  }
-
-  // Shuffle
-  pool = pool.sort(() => Math.random() - 0.5);
-  if (numQuestions > 0) pool = pool.slice(0, numQuestions);
-
-  studyState = {
-    questions: pool,
-    current: 0,
-    score: 0,
-    streak: 0,
-    maxStreak: 0
-  };
-
+  if (chFilter !== 'all') pool = pool.filter(s => s.chapterNum === parseInt(chFilter));
+  pool = pool.sort(() => Math.random()-0.5);
+  if (num > 0) pool = pool.slice(0, num);
+  studyState = { questions: pool, current: 0, score: 0, streak: 0, maxStreak: 0 };
   document.getElementById('streakDisplay').style.display = 'block';
-  showStudyQuestion();
+  showStudyQ();
 }
 
-async function showStudyQuestion() {
-  if (!studyState || studyState.current >= studyState.questions.length) {
-    showStudyResults();
-    return;
-  }
-
+async function showStudyQ() {
+  if (!studyState || studyState.current >= studyState.questions.length) { showStudyResults(); return; }
   const q = studyState.questions[studyState.current];
   const total = studyState.questions.length;
-  const pct = Math.round((studyState.current / total) * 100);
-
-  document.getElementById('studyProgress').style.width = pct + '%';
-  document.getElementById('studyProgressText').textContent = `${studyState.current + 1} / ${total}`;
+  document.getElementById('studyProgress').style.width = Math.round((studyState.current/total)*100)+'%';
+  document.getElementById('studyProgressText').textContent = `${studyState.current+1} / ${total}`;
   document.getElementById('streakNum').textContent = studyState.streak;
 
   const body = document.getElementById('studyBody');
   body.innerHTML = `
-    <div class="study-prompt">Look at this slide from ${q.chapter}. What did a student improve?</div>
+    <div class="study-prompt">Ch ${q.chapterNum}: ${CHAPTER_NAMES[q.chapterNum]} - Slide ${q.slideNum}. What did a student improve?</div>
     <div class="study-slide-container">
-      <div class="study-slide-preview" id="studySlidePreview">
-        <span class="loading">Loading slide...</span>
-      </div>
+      <div class="study-slide-preview" id="studySlide"><span class="loading">Loading...</span></div>
     </div>
-    <div class="study-options" id="studyOptions">
-      <button class="study-option" data-answer="Factual Fix">Found a Factual Error</button>
-      <button class="study-option" data-answer="Visual Overhaul">Better Visual/Diagram</button>
-      <button class="study-option" data-answer="Aha! Analogy">Better Explanation/Analogy</button>
-      <button class="study-option" data-answer="Clinical Hook">Clinical/Historical Connection</button>
+    <div class="study-options" id="studyOpts">
+      <button class="study-option" data-answer="Factual Fix">Factual Error</button>
+      <button class="study-option" data-answer="Visual Overhaul">Better Visual</button>
+      <button class="study-option" data-answer="Aha! Analogy">Better Analogy</button>
+      <button class="study-option" data-answer="Clinical Hook">Clinical Connection</button>
     </div>
     <div class="reveal-section" id="revealSection">
-      <h3>The student's improvement:</h3>
+      <h3>The improvement:</h3>
       <p id="revealText"></p>
-      <div style="margin-top:1rem;">
-        <button class="btn btn-accent" id="nextQuestion">Next Question &rarr;</button>
+      <div style="margin-top:0.75rem; display:flex; gap:0.5rem; align-items:center;">
+        <button class="btn btn-accent" id="nextQ">Next &rarr;</button>
+        <span style="font-size:0.75rem; color:var(--text-dim);" id="revealXP"></span>
       </div>
     </div>
   `;
 
-  // Render the PDF slide
-  const container = document.getElementById('studySlidePreview');
+  const container = document.getElementById('studySlide');
   try {
-    if (!pdfCache[q.chapterPdf]) {
-      pdfCache[q.chapterPdf] = await pdfjsLib.getDocument(PDF_BASE_PATH + q.chapterPdf).promise;
-    }
+    if (!pdfCache[q.chapterPdf]) pdfCache[q.chapterPdf] = await pdfjsLib.getDocument(PDF_BASE + q.chapterPdf).promise;
     const pdf = pdfCache[q.chapterPdf];
-    const pageNum = Math.min(q.slideNum, pdf.numPages);
-    const page = await pdf.getPage(pageNum);
-    const viewport = page.getViewport({ scale: 1 });
+    const page = await pdf.getPage(Math.min(q.slideNum, pdf.numPages));
+    const vp = page.getViewport({scale:1});
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    const containerWidth = container.clientWidth || 700;
-    const scale = containerWidth / viewport.width;
-    const sv = page.getViewport({ scale });
-    canvas.width = sv.width;
-    canvas.height = sv.height;
-    await page.render({ canvasContext: ctx, viewport: sv }).promise;
+    const scale = (container.clientWidth||650)/vp.width;
+    const svp = page.getViewport({scale});
+    canvas.width = svp.width; canvas.height = svp.height;
+    await page.render({canvasContext:ctx,viewport:svp}).promise;
     container.innerHTML = '';
     container.appendChild(canvas);
-  } catch(e) {
-    container.innerHTML = '<span class="loading">Could not load slide</span>';
-  }
+  } catch(e) { container.innerHTML = '<span class="loading">Could not load</span>'; }
 
-  // Set up answer clicks
   document.querySelectorAll('.study-option').forEach(opt => {
     opt.addEventListener('click', () => handleStudyAnswer(opt, q));
   });
 }
 
-function handleStudyAnswer(optEl, question) {
-  // Disable all options
-  document.querySelectorAll('.study-option').forEach(o => {
-    o.style.pointerEvents = 'none';
-  });
-
-  const answer = optEl.dataset.answer;
-  const correct = question.categories.includes(answer);
-
+function handleStudyAnswer(optEl, q) {
+  document.querySelectorAll('.study-option').forEach(o => o.style.pointerEvents = 'none');
+  const correct = q.categories.includes(optEl.dataset.answer);
+  let earned = 0;
   if (correct) {
     optEl.classList.add('correct');
-    studyState.score++;
-    studyState.streak++;
+    studyState.score++; studyState.streak++;
     studyState.maxStreak = Math.max(studyState.maxStreak, studyState.streak);
-    document.getElementById('streakNum').textContent = studyState.streak;
+    earned = 10 + (studyState.streak > 3 ? 5 : 0);
+    updateXP(earned);
   } else {
     optEl.classList.add('wrong');
     studyState.streak = 0;
-    document.getElementById('streakNum').textContent = 0;
-    // Highlight correct answer(s)
     document.querySelectorAll('.study-option').forEach(o => {
-      if (question.categories.includes(o.dataset.answer)) o.classList.add('correct');
+      if (q.categories.includes(o.dataset.answer)) o.classList.add('correct');
     });
+    earned = 2; // participation XP
+    updateXP(earned);
   }
-
-  // Show reveal
-  const reveal = document.getElementById('revealSection');
-  reveal.style.display = 'block';
-  document.getElementById('revealText').textContent = question.explanation || 'No explanation provided.';
-
-  document.getElementById('nextQuestion').addEventListener('click', () => {
-    studyState.current++;
-    showStudyQuestion();
-  });
+  document.getElementById('streakNum').textContent = studyState.streak;
+  document.getElementById('revealSection').style.display = 'block';
+  document.getElementById('revealText').textContent = q.explanation || 'No explanation provided.';
+  document.getElementById('revealXP').textContent = `+${earned} XP`;
+  document.getElementById('nextQ').addEventListener('click', () => { studyState.current++; showStudyQ(); });
 }
 
 function showStudyResults() {
   const total = studyState.questions.length;
-  const pct = Math.round((studyState.score / total) * 100);
-
+  const pct = Math.round((studyState.score/total)*100);
   document.getElementById('studyProgress').style.width = '100%';
-  document.getElementById('studyProgressText').textContent = 'Complete!';
+  document.getElementById('studyProgressText').textContent = 'Done!';
   document.getElementById('streakDisplay').style.display = 'none';
+
+  const bonus = studyState.maxStreak >= 5 ? 50 : studyState.maxStreak >= 3 ? 20 : 0;
+  if (bonus) updateXP(bonus);
 
   document.getElementById('studyBody').innerHTML = `
     <div class="study-score slide-up">
       <div class="score-num">${pct}%</div>
-      <p style="font-size:1.2rem; margin:0.5rem 0;">${studyState.score} / ${total} correct</p>
-      <p style="color:var(--text-dim);">Best streak: ${studyState.maxStreak}</p>
-      <p style="color:var(--text-dim); margin-top:0.5rem;">
-        ${pct >= 80 ? 'Excellent! You really know your biochemistry!' :
-          pct >= 60 ? 'Good job! Keep reviewing those slides.' :
-          pct >= 40 ? 'Not bad - the slides have some tricky issues!' :
-          'Time to review! Try the A/B comparison to learn more.'}
+      <p style="font-size:1.1rem; margin:0.4rem 0;">${studyState.score} / ${total} correct</p>
+      <p style="color:var(--text-dim);">Best streak: ${studyState.maxStreak} ${bonus ? `(+${bonus} bonus XP!)` : ''}</p>
+      <p style="color:var(--text-dim); margin-top:0.4rem; font-size:0.85rem;">
+        ${pct >= 80 ? 'Excellent! You know your biochemistry!' :
+          pct >= 60 ? 'Good work! Keep reviewing.' :
+          pct >= 40 ? 'Not bad - tricky stuff!' :
+          'Time to study! Try the A/B comparison.'}
       </p>
-      <div style="margin-top:1.5rem; display:flex; gap:0.75rem; justify-content:center;">
-        <button class="btn btn-accent" onclick="startQuiz(${total})">Try Again</button>
-        <button class="btn" onclick="document.querySelector('[data-view=comparison]').click()">Go to A/B Battle</button>
+      <div style="margin-top:1.5rem; display:flex; gap:0.6rem; justify-content:center;">
+        <button class="btn btn-accent" onclick="startQuiz(${total})">Retry</button>
+        <button class="btn" onclick="switchView('comparison')">A/B Battle</button>
+        <button class="btn" onclick="switchView('dashboard')">Dashboard</button>
       </div>
     </div>
   `;
@@ -1771,11 +1343,8 @@ function showStudyResults() {
 // ─── Leaderboard ───
 function setupLeaderboard() {
   const bar = document.getElementById('lbFilterBar');
-  const cats = ['All', 'Factual Fix', 'Visual Overhaul', 'Clinical Hook', 'Aha! Analogy'];
-  bar.innerHTML = cats.map(c =>
-    `<button class="filter-chip ${c==='All'?'active':''}" data-cat="${c}">${c}</button>`
-  ).join('');
-
+  const cats = ['All','Factual Fix','Visual Overhaul','Clinical Hook','Aha! Analogy'];
+  bar.innerHTML = cats.map(c => `<button class="filter-chip ${c==='All'?'active':''}" data-cat="${c}">${c}</button>`).join('');
   bar.querySelectorAll('.filter-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       bar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
@@ -1787,83 +1356,54 @@ function setupLeaderboard() {
 
 function renderLeaderboard(catFilter) {
   const tbody = document.getElementById('leaderboardBody');
-
-  // Score each submission
   let scored = appData.submissions.map(s => {
-    const v = votes[s.id] || { original: 0, improved: 0 };
+    const v = votes[s.id] || { original:0, improved:0 };
     const total = v.original + v.improved;
-    const winRate = total > 0 ? v.improved / total : 0;
-    return { ...s, votesFor: v.improved, votesAgainst: v.original, totalVotes: total, winRate };
+    return { ...s, votesFor: v.improved, totalVotes: total, winRate: total > 0 ? v.improved/total : 0 };
   });
-
-  if (catFilter) {
-    scored = scored.filter(s => s.categories.includes(catFilter));
-  }
-
-  // Sort by votes for, then win rate
+  if (catFilter) scored = scored.filter(s => s.categories.includes(catFilter));
   scored.sort((a,b) => b.votesFor - a.votesFor || b.winRate - a.winRate);
-  scored = scored.slice(0, 50); // Top 50
+  scored = scored.slice(0, 50);
 
   tbody.innerHTML = scored.map((s, i) => {
-    const rank = i + 1;
-    const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-other';
-    const catTags = s.categories.map(c => {
-      const cls = c.toLowerCase().replace(/[^a-z]/g, '-').replace(/--+/g, '-');
-      return `<span class="cat-tag ${cls}">${c}</span>`;
-    }).join(' ');
-
-    return `
-      <tr style="cursor:pointer;" onclick="jumpToSubmission(${s.id})">
-        <td><div class="rank-badge ${rankClass}">${rank}</div></td>
-        <td><strong>${escapeHtml(s.name)}</strong></td>
-        <td style="font-size:0.8rem; color:var(--text-dim);">${s.chapter}</td>
-        <td>Slide ${s.slideRaw}</td>
-        <td>${catTags}</td>
-        <td style="font-weight:700; color:var(--green);">${s.votesFor}</td>
-        <td>
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <div style="width:60px; height:6px; background:var(--surface2); border-radius:3px; overflow:hidden;">
-              <div style="width:${Math.round(s.winRate*100)}%; height:100%; background:var(--green); border-radius:3px;"></div>
-            </div>
-            <span style="font-size:0.8rem;">${s.totalVotes > 0 ? Math.round(s.winRate*100)+'%' : '-'}</span>
-          </div>
-        </td>
-      </tr>
-    `;
+    const rank = i+1;
+    const rc = rank <= 3 ? `rank-${rank}` : 'rank-other';
+    const catTags = s.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join(' ');
+    return `<tr style="cursor:pointer;" onclick="jumpToSubmission(${s.id})">
+      <td><div class="rank-badge ${rc}">${rank}</div></td>
+      <td><strong>${esc(s.name)}</strong></td>
+      <td style="font-size:0.75rem; color:var(--text-dim);">Ch ${s.chapterNum}</td>
+      <td>Slide ${s.slideNum||s.slideRaw}</td>
+      <td>${catTags}</td>
+      <td style="font-weight:700; color:var(--green);">${s.votesFor}</td>
+      <td><div style="display:flex;align-items:center;gap:0.4rem;">
+        <div style="width:50px;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;">
+          <div style="width:${Math.round(s.winRate*100)}%;height:100%;background:var(--green);border-radius:3px;"></div>
+        </div>
+        <span style="font-size:0.75rem;">${s.totalVotes>0?Math.round(s.winRate*100)+'%':'-'}</span>
+      </div></td>
+    </tr>`;
   }).join('');
 
   if (scored.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-dim); padding:2rem;">No votes yet! Go to A/B Battle to start voting.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-dim); padding:2rem;">No votes yet! Go to A/B Battle.</td></tr>';
   }
 }
 
 function jumpToSubmission(subId) {
-  const idx = filteredSubs.findIndex(s => s.id === subId);
-  if (idx >= 0) {
-    currentSubIndex = idx;
-  } else {
-    // Reset filters
-    activeCategory = null;
-    activeChapter = null;
-    filterSubmissions();
-    currentSubIndex = filteredSubs.findIndex(s => s.id === subId);
-    if (currentSubIndex < 0) currentSubIndex = 0;
-  }
-  document.querySelector('[data-view="comparison"]').click();
+  activeCategory = null; activeChapter = null;
+  filterSubmissions();
+  currentSubIndex = Math.max(0, filteredSubs.findIndex(s => s.id === subId));
+  switchView('comparison');
 }
 
-// ─── Utilities ───
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
+// ─── Utils ───
+function esc(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+function catClass(c) { return c.toLowerCase().replace(/[^a-z]/g, '-').replace(/--+/g, '-'); }
 function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
 }
 
 // ─── Start ───
