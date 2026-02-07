@@ -608,7 +608,7 @@ body {
       <div class="panel">
         <div class="panel-header improved">
           <span>Student Version</span>
-          <span id="studentName" style="font-size:0.7rem; color:var(--text-dim);"></span>
+          <span id="studentLabel" style="font-size:0.7rem; color:var(--text-dim);"></span>
         </div>
         <div class="panel-body">
           <div class="slide-preview" id="improvedPreview">
@@ -683,7 +683,7 @@ body {
       <div class="filter-bar" id="lbFilterBar"></div>
       <table class="leaderboard-table">
         <thead><tr>
-          <th>Rank</th><th>Student</th><th>Chapter</th><th>Slide</th><th>Category</th><th>Votes</th><th>Win Rate</th>
+          <th>Rank</th><th>Submission</th><th>Chapter</th><th>Slide</th><th>Category</th><th>Votes</th><th>Win Rate</th>
         </tr></thead>
         <tbody id="leaderboardBody"></tbody>
       </table>
@@ -995,7 +995,7 @@ async function renderSlideDetail() {
         <iframe src="https://drive.google.com/file/d/${s.driveId}/preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
       </div>
       <div class="card-body">
-        <div class="card-name">${esc(s.name)} <span style="color:var(--text-dim);font-size:0.7rem;">Pod ${s.pod}</span></div>
+        <div class="card-name">Submission #${s.id + 1}</div>
         <div class="category-tags" style="margin-top:0.3rem;">${catTags}</div>
         <div class="card-explain">${esc(s.explanation)}</div>
         <div class="card-vote-row">
@@ -1041,7 +1041,7 @@ function expandSubmission(subId) {
   body.innerHTML = `
     <iframe src="https://drive.google.com/file/d/${sub.driveId}/preview" style="width:100%;height:70vh;border:none;border-radius:8px;" allow="autoplay"></iframe>
     <div style="margin-top:1rem; text-align:left;">
-      <strong>${esc(sub.name)}</strong> (Pod ${sub.pod}) &mdash; ${sub.chapter}, Slide ${sub.slideRaw}
+      <strong>Submission #${sub.id + 1}</strong> &mdash; ${sub.chapter}, Slide ${sub.slideRaw}
       <div class="category-tags" style="margin-top:0.5rem;">${sub.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join('')}</div>
       <p style="margin-top:0.75rem; font-size:0.8rem; line-height:1.5; color:var(--text-dim);">${esc(sub.explanation)}</p>
     </div>
@@ -1130,7 +1130,7 @@ async function showComparison(idx) {
 
   document.getElementById('subCounter').textContent = `${idx+1} / ${filteredSubs.length}`;
   document.getElementById('origSlideLabel').textContent = `${sub.chapter} - Slide ${sub.slideRaw}`;
-  document.getElementById('studentName').textContent = `${sub.name} (Pod ${sub.pod})`;
+  document.getElementById('studentLabel').textContent = `Submission #${sub.id + 1}`;
 
   renderPdfSlide(sub, 'originalPreview');
   renderDrivePreview(sub, 'improvedPreview');
@@ -1371,7 +1371,7 @@ function renderLeaderboard(catFilter) {
     const catTags = s.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join(' ');
     return `<tr style="cursor:pointer;" onclick="jumpToSubmission(${s.id})">
       <td><div class="rank-badge ${rc}">${rank}</div></td>
-      <td><strong>${esc(s.name)}</strong></td>
+      <td><strong>Submission #${s.id + 1}</strong></td>
       <td style="font-size:0.75rem; color:var(--text-dim);">Ch ${s.chapterNum}</td>
       <td>Slide ${s.slideNum||s.slideRaw}</td>
       <td>${catTags}</td>
