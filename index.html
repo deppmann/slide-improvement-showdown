@@ -243,11 +243,10 @@ body {
   overflow: hidden;
   position: relative;
 }
-.submission-card .card-img iframe {
+.submission-card .card-img img {
   width: 100%;
   height: 100%;
-  border: none;
-  pointer-events: none;
+  object-fit: contain;
 }
 .submission-card .card-body { padding: 0.75rem 1rem; }
 .submission-card .card-name { font-weight: 600; font-size: 0.85rem; }
@@ -307,7 +306,9 @@ body {
   display: flex; align-items: center; justify-content: center; overflow: hidden;
 }
 .slide-preview canvas { max-width: 100%; max-height: 100%; }
-.slide-preview iframe { width: 100%; height: 100%; border: none; }
+.slide-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.slide-nav { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.4rem; font-size: 0.75rem; color: var(--text-dim); }
+.slide-nav button { background: var(--surface2, #2a2a3a); color: inherit; border: 1px solid var(--border, #444); border-radius: 6px; padding: 0.15rem 0.6rem; cursor: pointer; }
 .slide-preview .loading { color: var(--text-dim); font-size: 0.8rem; }
 
 .vs-divider { display: flex; align-items: center; justify-content: center; }
@@ -992,7 +993,7 @@ async function renderSlideDetail() {
 
     return `<div class="submission-card fade-in">
       <div class="card-img" onclick="expandSubmission(${s.id})">
-        <iframe src="https://drive.google.com/file/d/${s.driveId}/preview" loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+        ${s.slides && s.slides.length ? `<img src="${s.slides[0]}" alt="Student slide, submission ${s.id + 1}" loading="lazy">` : '<span class="loading">No file</span>'}
       </div>
       <div class="card-body">
         <div class="card-name">Submission #${s.id + 1}</div>
@@ -1039,13 +1040,14 @@ function expandSubmission(subId) {
   const modal = document.getElementById('imageModal');
   const body = document.getElementById('imageModalBody');
   body.innerHTML = `
-    <iframe src="https://drive.google.com/file/d/${sub.driveId}/preview" style="width:100%;height:70vh;border:none;border-radius:8px;" allow="autoplay"></iframe>
+    <div id="modalSlide" style="height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;"></div>
     <div style="margin-top:1rem; text-align:left;">
       <strong>Submission #${sub.id + 1}</strong> &mdash; ${sub.chapter}, Slide ${sub.slideRaw}
       <div class="category-tags" style="margin-top:0.5rem;">${sub.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join('')}</div>
       <p style="margin-top:0.75rem; font-size:0.8rem; line-height:1.5; color:var(--text-dim);">${esc(sub.explanation)}</p>
     </div>
   `;
+  renderSlideImages(sub, 'modalSlide');
   modal.classList.add('active');
 }
 
@@ -1133,7 +1135,7 @@ async function showComparison(idx) {
   document.getElementById('studentLabel').textContent = `Submission #${sub.id + 1}`;
 
   renderPdfSlide(sub, 'originalPreview');
-  renderDrivePreview(sub, 'improvedPreview');
+  renderSlideImages(sub, 'improvedPreview');
 
   const catTags = sub.categories.map(c => `<span class="cat-tag ${catClass(c)}">${c}</span>`).join('');
   document.getElementById('submissionInfo').innerHTML = `
@@ -1166,11 +1168,24 @@ async function renderPdfSlide(sub, containerId) {
   } catch(e) { container.innerHTML = '<span class="loading">Could not load</span>'; }
 }
 
-function renderDrivePreview(sub, containerId) {
+function renderSlideImages(sub, containerId) {
   const container = document.getElementById(containerId);
-  if (!sub.driveId) { container.innerHTML = '<span class="loading">No file</span>'; return; }
-  // Use Google Drive's preview iframe — works for PPTX, PDF, images
-  container.innerHTML = `<iframe src="https://drive.google.com/file/d/${sub.driveId}/preview" style="width:100%;height:100%;border:none;" allow="autoplay" loading="lazy"></iframe>`;
+  const slides = sub.slides || [];
+  if (!slides.length) { container.innerHTML = '<span class="loading">No file</span>'; return; }
+  let n = 0;
+  const show = () => {
+    const nav = slides.length > 1
+      ? `<div class="slide-nav"><button type="button" data-d="-1">&lsaquo; Prev</button><span>${n + 1} / ${slides.length}</span><button type="button" data-d="1">Next &rsaquo;</button></div>`
+      : '';
+    container.innerHTML = `<img src="${slides[n]}" alt="Student slide, submission ${sub.id + 1}" style="max-width:100%;max-height:${slides.length > 1 ? 'calc(100% - 2rem)' : '100%'};object-fit:contain;">${nav}`;
+    container.querySelectorAll('.slide-nav button').forEach(b => b.addEventListener('click', e => {
+      e.stopPropagation();
+      n = (n + parseInt(b.dataset.d) + slides.length) % slides.length;
+      show();
+    }));
+  };
+  if (slides.length > 1) container.style.flexDirection = 'column';
+  show();
 }
 
 function handleVote(voteType) {
